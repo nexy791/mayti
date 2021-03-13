@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/item_search"
+        android:icon="@drawable/ic_outline_layers_24"
+        android:title="Поиск"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_rating"
+        android:icon="@drawable/ic_round_auto_graph_24"
+        android:title="Рейтинг"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_account"
+        android:icon="@drawable/ic_outline_account_circle_24"
+        android:title="Аккаунт"
+        app:showAsAction="always" />
+
+</menu>

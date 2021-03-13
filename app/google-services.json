@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "830101106185",
+    "project_id": "mayti-bbb73",
+    "storage_bucket": "mayti-bbb73.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830101106185:android:e8b1d91da7f244d2b492d8",
+        "android_client_info": {
+          "package_name": "com.ribsky.mayti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830101106185-gqirgv9g6ofuq4kfbhlqmki6blkk28cd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACNnTDlmYx8spqdsB-4dEB6TVUQy-A1MA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830101106185-gqirgv9g6ofuq4kfbhlqmki6blkk28cd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.preference.PreferenceCategory android:title="Поддержка">
+
+        <Preference
+            app:icon="@drawable/ic_outline_favorite_border_24"
+            app:key="pref_rate"
+            app:summary="Улучшить приложение"
+            app:title="Поставить оценку">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_outline_share_24"
+            app:key="pref_share"
+            app:summary="Поделиться приложением"
+            app:title="Поделиться">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_baseline_apps_24"
+            app:key="pref_dev"
+            app:summary="Все приложения разработчика"
+            app:title="Все приложения">
+
+        </Preference>
+
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="Аккаунт">
+
+        <Preference
+            app:icon="@drawable/ic_outline_support_24"
+            app:key="pref_support"
+            app:summary="Получить ответ на свой вопрос"
+            app:title="Поддержка" />
+
+
+        <Preference
+            app:icon="@drawable/ic_outline_manage_accounts_24"
+            app:key="pref_change"
+            app:summary="Изменить информацию об аккаунте"
+            app:title="Изменить аккаунт">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_outline_no_accounts_24"
+            app:key="pref_delete"
+            app:summary="Удалить аккаунт и все данные"
+            app:title="Удалить аккаунт" />
+
+        <Preference
+            app:icon="@drawable/ic_outline_logout_24"
+            app:key="pref_logout"
+            app:summary="Выйти из аккаунта"
+            app:title="Выход">
+
+        </Preference>
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory android:title="Информация">
+
+        <Preference
+            app:icon="@drawable/ic_outline_copyright_24"
+            app:key="pref_sec"
+            app:summary="Все права принадлежат их владельцам"
+            app:title="Права">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_outline_security_24"
+            app:key="pref_terms"
+            app:summary="Правила и политика конфиденциальности"
+            app:title="Политика">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_outline_book_24"
+            app:key="pref_lib"
+            app:summary="Библиотеки в приложении"
+            app:title="Библиотеки">
+
+        </Preference>
+
+        <Preference
+            app:icon="@drawable/ic_outline_info_24"
+            app:key="pref_info"
+            app:summary="Версия приложения"
+            app:title="1.0.0">
+
+        </Preference>
+
+    </androidx.preference.PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>
