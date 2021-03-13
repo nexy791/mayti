@@ -10,7 +10,7 @@
 
 Доступно в [Google Play](https://play.google.com/store/apps/details?id=com.ribsky.mayti)
 
-## Технологии
+## 🤔 Технологии
 
 * Kotlin
 * Admob
