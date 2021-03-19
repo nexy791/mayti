@@ -10,6 +10,10 @@
 
 Доступно в [Google Play](https://play.google.com/store/apps/details?id=com.ribsky.mayti)
 
+## 🔥 Прогресс
+
+[Наблюдать за mayti roadmap](https://github.com/nexy791/mayti/projects/1)
+
 ## 🤔 Технологии
 
 * Kotlin
