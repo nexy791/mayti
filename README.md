@@ -12,7 +12,7 @@
 
 ## 🔥 Прогресс
 
-[Наблюдать за mayti roadmap](https://github.com/nexy791/mayti/projects/1)
+[Перейти в mayti roadmap](https://github.com/nexy791/mayti/projects/1)
 
 ## 🤔 Технологии
 
