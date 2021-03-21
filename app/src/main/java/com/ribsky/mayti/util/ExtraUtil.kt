@@ -24,7 +24,10 @@ class ExtraUtil {
             "Clash of Clans",
             "Brawl Stars",
             "PUBG: Mobile",
-            "Standoff 2"
+            "Standoff 2",
+            "Among us",
+            "Roblox",
+            "World of Tanks Blitz"
         )
 
         const val AD_TEST_CODE: String = "ca-app-pub-3940256099942544/5224354917"
