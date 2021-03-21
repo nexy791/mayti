@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_intro"
+    app:startDestination="@id/intro1Fragment">
+
+    <fragment
+        android:id="@+id/intro1Fragment"
+        android:name="com.ribsky.mayti.ui.fragment.intro.Intro1Fragment"
+        android:label="Intro1Fragment" />
+    <fragment
+        android:id="@+id/intro2Fragment"
+        android:name="com.ribsky.mayti.ui.fragment.intro.Intro2Fragment"
+        android:label="Intro2Fragment" />
+    <fragment
+        android:id="@+id/intro3Fragment"
+        android:name="com.ribsky.mayti.ui.fragment.intro.Intro3Fragment"
+        android:label="Intro3Fragment" />
+    <fragment
+        android:id="@+id/intro4Fragment"
+        android:name="com.ribsky.mayti.ui.fragment.intro.Intro4Fragment"
+        android:label="Intro4Fragment" />
+    <fragment
+        android:id="@+id/intro5Fragment"
+        android:name="com.ribsky.mayti.ui.fragment.intro.Intro5Fragment"
+        android:label="Intro5Fragment" />
+</navigation>

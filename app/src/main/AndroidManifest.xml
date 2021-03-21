@@ -18,30 +18,30 @@
             android:value="ca-app-pub-4406747838048228~7707214372" />
 
         <activity
-            android:name=".activities.LibActivity"
+            android:name="com.ribsky.mayti.ui.activity.lib.LibActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.UserInfoActivity"
+            android:name="com.ribsky.mayti.ui.activity.user.UserInfoActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.BlockedActivity"
+            android:name="com.ribsky.mayti.ui.activity.blocked.BlockedActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name="com.ribsky.mayti.ui.activity.settings.SettingsActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.IntroActivity"
+            android:name="com.ribsky.mayti.ui.activity.intro.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.ribsky.mayti.ui.activity.main.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.ribsky.mayti.ui.activity.splash.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
