@@ -11,95 +11,87 @@ import com.ribsky.mayti.ui.fragment.profile.ProfileFragment
 class AlertsUtil(private val activity: Activity) {
 
     fun alertExit() {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Выход")
-        alertDialog.setCancelable(true)
-        alertDialog.setMessage("Ты действительно хочешь выйти с mayti?")
-        alertDialog.setPositiveButton("Выход") { _, _ -> activity.finish() }
-        alertDialog.setNegativeButton(
-            "Отмена"
-        ) { _, _ -> activity.finish() }
-        alertDialog.show()
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Выход")
+            setCancelable(true)
+            setMessage("Ты действительно хочешь выйти с mayti?")
+            setPositiveButton("Выход") { _, _ -> activity.finish() }
+            setNegativeButton(
+                "Отмена"
+            ) { _, _ -> activity.finish() }
+            show()
+        }
+
     }
 
     fun alertCriticalError() {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Ошибка")
-        alertDialog.setCancelable(false)
-        alertDialog.setMessage("Произошла ошибка загрузки данных. Пожалуйста, перезайди в mayti")
-        alertDialog.setPositiveButton("Перезайти") { _, _ -> activity.finish() }
-        alertDialog.setNegativeButton(
-            "Поддержка"
-        ) { _, _ -> alertSupport() }
-        alertDialog.show()
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Ошибка")
+            setCancelable(false)
+            setMessage("Произошла ошибка загрузки данных. Пожалуйста, перезайди в mayti")
+            setPositiveButton("Перезайти") { _, _ -> activity.finish() }
+            setNegativeButton(
+                "Поддержка"
+            ) { _, _ -> alertSupport() }
+            show()
+        }
     }
 
     fun alertSupport() {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Поддержка")
-        alertDialog.setCancelable(true)
-        alertDialog.setMessage("Напиши на почту, чтобы узнать ответ на свой вопрос или пожаловаться")
-        /*alertDialog.setPositiveButton("VK") { _, _ ->
-
-        activity.startActivity(
-            Intent.createChooser(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse(ExtraUtil.VK_SMS_LINK)
-                ), "Написать"
-            )
-        )
-
-    }*/
-        alertDialog.setNegativeButton(
-            "Email"
-        ) { _, _ ->
-            activity.startActivity(
-                Intent.createChooser(
-                    Intent(
-                        Intent.ACTION_SENDTO,
-                        Uri.parse("mailto:nexy791@gmail.com")
-                    ), "Написать"
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Поддержка")
+            setCancelable(true)
+            setMessage("Напиши на почту, чтобы узнать ответ на свой вопрос или пожаловаться")
+            setNegativeButton(
+                "Email"
+            ) { _, _ ->
+                activity.startActivity(
+                    Intent.createChooser(
+                        Intent(
+                            Intent.ACTION_SENDTO,
+                            Uri.parse("mailto:nexy791@gmail.com")
+                        ), "Написать"
+                    )
                 )
-            )
+            }
+            show()
         }
-
-        alertDialog.show()
     }
 
     fun alertRelogin() {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Упс!")
-        alertDialog.setCancelable(false)
-        alertDialog.setMessage("Похоже, что пришло время перезайти в аккаунт mayti!")
-        alertDialog.setPositiveButton("Перезайти") { _, _ ->
-            activity.startActivity(Intent(activity, SplashActivity::class.java))
-            activity.finish()
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Упс!")
+            setCancelable(false)
+            setMessage("Похоже, что пришло время перезайти в аккаунт mayti!")
+            setPositiveButton("Перезайти") { _, _ ->
+                activity.startActivity(Intent(activity, SplashActivity::class.java))
+                activity.finish()
+            }
+            show()
         }
-        alertDialog.show()
     }
 
     fun alertWhatIsLikes(fragment: ProfileFragment) {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Получить лайки")
-        alertDialog.setCancelable(false)
-        alertDialog.setMessage("Ты можешь получить 1 лайк каждые 12 часов или с моментально помощью рекламы")
-        alertDialog.setPositiveButton("Продолжить") { _, _ ->
-            fragment.getLikes()
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Получить лайки")
+            setCancelable(false)
+            setMessage("Ты можешь получить 1 лайк каждые 12 часов или с моментально помощью рекламы")
+            setPositiveButton("Продолжить") { _, _ ->
+                fragment.getLikes()
+            }
+            setNegativeButton("Отмена") { _, _ -> }
+            show()
         }
-        alertDialog.setNegativeButton("Отмена") { _, _ -> }
-        alertDialog.show()
     }
 
     fun alertNoLikes() {
-        val alertDialog = MaterialAlertDialogBuilder(activity)
-        alertDialog.setTitle("Не хватает лайков!")
-        alertDialog.setCancelable(true)
-        alertDialog.setMessage("У тебя не хватает лайков. Ты можешь получить лайки, посмотрев рекламу. Для этого перейди в свой Профиль")
-        alertDialog.setPositiveButton("Понятно") { _, _ -> }
-        alertDialog.setNegativeButton("Отмена") { _, _ -> }
-        alertDialog.show()
+        with(MaterialAlertDialogBuilder(activity)) {
+            setTitle("Не хватает лайков!")
+            setCancelable(true)
+            setMessage("У тебя не хватает лайков. Ты можешь получить лайки, посмотрев рекламу. Для этого перейди в свой Профиль")
+            setPositiveButton("Понятно") { _, _ -> }
+            setNegativeButton("Отмена") { _, _ -> }
+            show()
+        }
     }
-
-
 }

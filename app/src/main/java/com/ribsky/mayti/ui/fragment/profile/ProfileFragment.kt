@@ -68,7 +68,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnAdd.setOnClickListener {
-            getLikes()
+            AlertsUtil(requireActivity()).alertWhatIsLikes(this)
         }
 
         return binding.root

@@ -23,6 +23,7 @@ import com.ribsky.mayti.ui.activity.blocked.BlockedActivity
 import com.ribsky.mayti.ui.activity.settings.SettingsActivity
 import com.ribsky.mayti.util.AlertsUtil
 import com.ribsky.mayti.util.ExtraUtil
+import com.ribsky.mayti.util.RateApp
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 import kotlin.collections.ArrayList
@@ -62,6 +63,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         MobileAds.initialize(this) {}
 
 
+        RateApp(this).initialization()
         initAd()
 
     }
