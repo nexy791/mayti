@@ -22,11 +22,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         addPreferencesFromResource(R.xml.preferences)
 
         findPreference<Preference>("pref_rate")?.setOnPreferenceClickListener {
-            val browserIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/details?id=com.ribsky.mayti")
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.ribsky.mayti")
+                )
             )
-            startActivity(browserIntent)
             true
         }
 
@@ -38,16 +39,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 "mayti - сообщество поиска тиммейтов для любых игр.\n\nhttps://play.google.com/store/apps/details?id=com.ribsky.mayti"
             )
             sendIntent.type = "text/plain"
-            val shareIntent = Intent.createChooser(sendIntent, null)
-            startActivity(shareIntent)
+            startActivity(Intent.createChooser(sendIntent, null))
             true
         }
         findPreference<Preference>("pref_dev")?.setOnPreferenceClickListener {
-            val browserIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://play.google.com/store/apps/dev?id=8181581032390861790")
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/dev?id=8181581032390861790")
+                )
             )
-            startActivity(browserIntent)
             true
         }
         findPreference<Preference>("pref_support")?.setOnPreferenceClickListener {
@@ -55,7 +56,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         findPreference<Preference>("pref_change")?.setOnPreferenceClickListener {
-            MaterialAlertDialogBuilder(requireContext()).apply {
+            with(MaterialAlertDialogBuilder(requireContext())) {
                 setTitle("Изменить аккаунт")
                 setMessage("Ты действительно хочешь изменить данные об аккаунте?")
                 setCancelable(true)
@@ -70,7 +71,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("pref_delete")?.setOnPreferenceClickListener {
-            MaterialAlertDialogBuilder(requireContext()).apply {
+            with(MaterialAlertDialogBuilder(requireContext())) {
                 setTitle("Удалить аккаунт")
                 setMessage("Ты действительно хочешь удалить аккаунт mayti? Это действие невозможно отменить")
                 setCancelable(true)
@@ -90,7 +91,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("pref_logout")?.setOnPreferenceClickListener {
-            MaterialAlertDialogBuilder(requireContext()).apply {
+            with(MaterialAlertDialogBuilder(requireContext())) {
                 setTitle("Выход")
                 setMessage("Ты действительно хочешь выйти?")
                 setCancelable(true)
@@ -106,11 +107,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("pref_terms")?.setOnPreferenceClickListener {
-            val browserIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/nexy791/mayti/blob/master/policy.md")
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(ExtraUtil.LINK_PRIVACY_POLICY)
+                )
             )
-            startActivity(browserIntent)
             true
         }
 

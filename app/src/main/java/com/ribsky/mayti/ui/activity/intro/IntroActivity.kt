@@ -43,13 +43,12 @@ class IntroActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.item_support -> {
                 AlertsUtil(this).alertSupport()
-                true
             }
-            else -> true
         }
+        return true
     }
 
     fun goFragment(i: Int) {

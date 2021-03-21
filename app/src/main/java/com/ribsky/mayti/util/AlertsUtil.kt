@@ -58,7 +58,7 @@ class AlertsUtil(private val activity: Activity) {
         }
     }
 
-    fun alertRelogin() {
+    fun alertReLogin() {
         with(MaterialAlertDialogBuilder(activity)) {
             setTitle("Упс!")
             setCancelable(false)
@@ -71,7 +71,7 @@ class AlertsUtil(private val activity: Activity) {
         }
     }
 
-    fun alertWhatIsLikes(fragment: ProfileFragment) {
+    fun alertLikesInfo(fragment: ProfileFragment) {
         with(MaterialAlertDialogBuilder(activity)) {
             setTitle("Получить лайки")
             setCancelable(false)

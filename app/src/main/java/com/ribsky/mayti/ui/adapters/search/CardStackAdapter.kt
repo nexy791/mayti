@@ -94,14 +94,6 @@ class CardStackAdapter(
         return spots.size
     }
 
-    fun setSpots(spots: List<UserModel>) {
-        this.spots = spots
-    }
-
-    fun getSpots(): List<UserModel> {
-        return spots
-    }
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemSpotBinding.bind(view)
     }

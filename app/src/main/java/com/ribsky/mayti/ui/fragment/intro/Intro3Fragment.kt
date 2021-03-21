@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
@@ -19,9 +18,6 @@ class Intro3Fragment : Fragment() {
 
     private var _binding: FragmentIntro3Binding? = null
     private val binding get() = _binding!!
-
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +44,7 @@ class Intro3Fragment : Fragment() {
                     if (binding.textInputLayout.editText!!.text.toString().isNotEmpty()) {
                         currentAccount.bio = binding.textInputLayout.editText!!.text.toString()
                     }
+                    writeUser(currentAccount)
                     goFragment(3)
                 }
             }

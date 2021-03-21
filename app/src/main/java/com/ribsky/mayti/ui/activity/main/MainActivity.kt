@@ -159,7 +159,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun criticalErrorAuth() {
-        AlertsUtil(this).alertRelogin()
+        AlertsUtil(this).alertReLogin()
         Firebase.auth.signOut()
     }
 

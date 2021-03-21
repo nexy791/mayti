@@ -38,13 +38,13 @@ class SearchFragment : Fragment(), CardStackListener {
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this) //Register
+        EventBus.getDefault().register(this)
         (requireActivity() as MainActivity).sendUsers()
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this) //unregister
+        EventBus.getDefault().unregister(this)
     }
 
     @Subscribe

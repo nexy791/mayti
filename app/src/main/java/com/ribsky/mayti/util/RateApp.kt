@@ -12,11 +12,11 @@ class RateApp(private val context: Context) {
 
     private val alertTitle: String = "Оценить"
     private val alertBody: String =
-        "Если вам нравится приложение ${context.getString(R.string.app_name)}, пожалуйста, оцените его!"
+        "Если тебе нравится приложение ${context.getString(R.string.app_name)}, пожалуйста, оцените его!"
     private val range: Int = 3
 
 
-    fun showDialog() {
+    private fun showDialog() {
         with(MaterialAlertDialogBuilder(context)) {
             setTitle(alertTitle)
             setMessage(alertBody)
@@ -29,13 +29,13 @@ class RateApp(private val context: Context) {
         }
     }
 
-    fun getWasShown(): Boolean {
+    private fun getWasShown(): Boolean {
         val mSettings: SharedPreferences =
             context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
         return mSettings.getBoolean("shown", false)
     }
 
-    fun setWasShown() {
+    private fun setWasShown() {
         val mSettings: SharedPreferences =
             context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
         val editor = mSettings.edit()
@@ -43,12 +43,12 @@ class RateApp(private val context: Context) {
         editor.apply()
     }
 
-    fun isCanShow(): Boolean {
+    private fun isCanBeShown(): Boolean {
         return Random().nextInt(range) == 0
     }
 
     fun initialization() {
-        if (isCanShow() && !getWasShown()) {
+        if (isCanBeShown() && !getWasShown()) {
             showDialog()
         }
     }

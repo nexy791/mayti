@@ -64,11 +64,11 @@ class ProfileFragment : Fragment() {
         }
 
         binding.materialButton.setOnClickListener {
-            AlertsUtil(requireActivity()).alertWhatIsLikes(this)
+            AlertsUtil(requireActivity()).alertLikesInfo(this)
         }
 
         binding.btnAdd.setOnClickListener {
-            AlertsUtil(requireActivity()).alertWhatIsLikes(this)
+            AlertsUtil(requireActivity()).alertLikesInfo(this)
         }
 
         return binding.root

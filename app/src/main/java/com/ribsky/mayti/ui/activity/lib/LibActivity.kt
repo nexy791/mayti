@@ -2,18 +2,19 @@ package com.ribsky.mayti.ui.activity.lib
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
-import com.ribsky.mayti.R
+import com.ribsky.mayti.databinding.ActivityLibBinding
 
 class LibActivity : AppCompatActivity() {
 
+    lateinit var binding: ActivityLibBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lib)
+        binding = ActivityLibBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.topAppBar)
 
-        findViewById<MaterialToolbar>(R.id.topAppBar).setNavigationOnClickListener {
-            onBackPressed()
-        }
+        binding.topAppBar.setNavigationOnClickListener { onBackPressed() }
 
     }
 }

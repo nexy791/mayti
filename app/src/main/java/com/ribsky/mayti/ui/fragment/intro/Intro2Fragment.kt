@@ -57,6 +57,7 @@ class Intro2Fragment : Fragment() {
             with((requireActivity() as IntroActivity)) {
                 if (checkIds.isNotEmpty()) {
                     currentAccount.games = checkIds
+                    writeUser(currentAccount)
                 }
                 goFragment(2)
             }

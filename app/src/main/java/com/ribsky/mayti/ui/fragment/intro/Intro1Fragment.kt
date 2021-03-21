@@ -14,8 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -67,7 +67,7 @@ class Intro1Fragment : Fragment() {
         binding.textView4.setOnClickListener {
             val browserIntent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://github.com/nexy791/mayti/blob/master/policy.md")
+                Uri.parse(ExtraUtil.LINK_PRIVACY_POLICY)
             )
             startActivity(browserIntent)
         }
@@ -90,7 +90,7 @@ class Intro1Fragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val mAuth = FirebaseAuth.getInstance()
+        val mAuth = Firebase.auth
         if (requestCode == ExtraUtil.REQUEST_CODE_REGISTER_FIREBASE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {

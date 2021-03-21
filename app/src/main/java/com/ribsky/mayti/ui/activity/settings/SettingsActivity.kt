@@ -3,6 +3,7 @@ package com.ribsky.mayti.ui.activity.settings
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import com.ribsky.mayti.databinding.ActivitySettingsBinding
 import com.ribsky.mayti.ui.fragment.settings.SettingsFragment
 
@@ -20,8 +21,10 @@ class SettingsActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
-        supportFragmentManager.beginTransaction().replace(binding.container.id, SettingsFragment())
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
+        supportFragmentManager.commit {
+            replace(binding.container.id, SettingsFragment())
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
+        }
 
     }
 }

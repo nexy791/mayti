@@ -3,7 +3,8 @@ package com.ribsky.mayti.ui.activity.splash
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ribsky.mayti.databinding.ActivitySplashBinding
 import com.ribsky.mayti.ui.activity.intro.IntroActivity
 import com.ribsky.mayti.ui.activity.main.MainActivity
@@ -20,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        if (FirebaseAuth.getInstance().currentUser == null) {
+        if (Firebase.auth.currentUser == null) {
             Timer("").schedule(800) {
                 startActivity(Intent(this@SplashActivity, IntroActivity::class.java))
                 finish()

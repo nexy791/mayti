@@ -2,16 +2,13 @@ package com.ribsky.mayti.util
 
 import android.content.Context
 import com.securepreferences.SecurePreferences
-import java.security.MessageDigest
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.text.Charsets.UTF_8
 
 
 class ExtraUtil {
 
     companion object {
-        const val VK_SMS_LINK: String = "https://vk.me/join/f1zOM_qaZKnGclkvVzPqFfi_vz93trpDiWw="
         const val SHARED_PREFS_NAME: String = "com.ribsky.mayti"
         const val REQUEST_CODE_REGISTER_FIREBASE: Int = 100
         const val RESULT_INFO: Int = 101
@@ -33,14 +30,9 @@ class ExtraUtil {
         const val AD_TEST_CODE: String = "ca-app-pub-3940256099942544/5224354917"
         const val AD_NORMAL_CODE: String = "ca-app-pub-4406747838048228/7515642683"
 
-    }
+        const val LINK_PRIVACY_POLICY: String =
+            "https://github.com/nexy791/mayti/blob/master/policy.md"
 
-    fun getHash(string: String): String {
-        return MessageDigest.getInstance("SHA-256").digest(string.toByteArray(UTF_8)).toHex()
-    }
-
-    fun ByteArray.toHex(): String {
-        return joinToString("") { "%02x".format(it) }
     }
 
     fun getLikes(context: Context, uid: String): Int {
@@ -84,35 +76,38 @@ class ExtraUtil {
             getCurrentDate().toDate(SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
         )
 
-        if (diffed >= 12
-        ) {
+        when {
+            diffed >= 12 -> {
 
-            val coins: Int = (diffed / 12)
+                val coins: Int = (diffed / 12)
 
-            ExtraUtil().setLikes(
-                context, uid,
-                ExtraUtil().getLikes(context, uid) + coins
-            )
+                ExtraUtil().setLikes(
+                    context, uid,
+                    ExtraUtil().getLikes(context, uid) + coins
+                )
 
-            setTimeToShared(context, uid)
+                setTimeToShared(context, uid)
 
-            return coins
-        } else if (diffed < 0) {
-            ExtraUtil().setLikes(
-                context, uid,
-                0
-            )
-            setTimeToShared(context, uid)
-            return 0
-        } else {
-            return 0
+                return coins
+            }
+            diffed < 0 -> {
+                ExtraUtil().setLikes(
+                    context, uid,
+                    0
+                )
+                setTimeToShared(context, uid)
+                return 0
+            }
+            else -> {
+                return 0
+            }
         }
 
 
     }
 
     private fun diffTime(startDate: Date, endDate: Date): Int {
-        //milliseconds
+
         val different = endDate.time - startDate.time
 
         val secondsInMilli: Long = 1000

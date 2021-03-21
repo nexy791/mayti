@@ -1,7 +1,7 @@
 package com.ribsky.mayti.repository.main
 
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -20,12 +20,10 @@ class MainRepository : MainContract.Repository {
     private lateinit var dataSnapshot: DataSnapshot
 
     override fun getAuthUser(): FirebaseUser? {
-        val mAuth = FirebaseAuth.getInstance()
-        return mAuth.currentUser
+        return Firebase.auth.currentUser
     }
 
     override fun initialization(callback: (result: Boolean) -> Unit) {
-        // database.setPersistenceEnabled(true)
         databaseReference.get().addOnSuccessListener {
             dataSnapshot = it
             callback.invoke(true)
@@ -37,17 +35,21 @@ class MainRepository : MainContract.Repository {
     override fun getUsers(): ArrayList<UserModel> {
         val arrayList: ArrayList<UserModel> = ArrayList()
         dataSnapshot.children.forEach {
-            arrayList.add(
-                UserModel(
-                    it.child("uid").value as String,
-                    it.child("fln").value as String,
-                    it.child("bio").value as String,
-                    it.child("photo").value as String,
-                    (it.child("games").value as List<Long>).map { it1 -> it1.toInt() },
-                    it.child("social").value as String,
-                    it.child("isBlocked").value as Boolean
+
+            if (!(it.child("isBlocked").value as Boolean) && (it.child("social").value as String).isNotBlank()
+            ) {
+                arrayList.add(
+                    UserModel(
+                        it.child("uid").value as String,
+                        it.child("fln").value as String,
+                        it.child("bio").value as String,
+                        it.child("photo").value as String,
+                        (it.child("games").value as List<Long>).map { it1 -> it1.toInt() },
+                        it.child("social").value as String,
+                        it.child("isBlocked").value as Boolean
+                    )
                 )
-            )
+            }
         }
         return arrayList
     }
