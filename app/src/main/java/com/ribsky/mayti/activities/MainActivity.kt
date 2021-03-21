@@ -66,11 +66,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     fun initAd() {
 
         var adRequest = AdRequest.Builder().build()
-//ca-app-pub-3940256099942544/5224354917 - test
-        // ca-app-pub-4406747838048228/7515642683 - normal
         RewardedAd.load(
             this,
-            "ca-app-pub-4406747838048228/7515642683",
+            ExtraUtils.AD_NORMAL_CODE,
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {

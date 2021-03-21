@@ -17,6 +17,7 @@ class ExtraUtils {
         const val RESULT_INFO: Int = 101
         const val FIREBASE_DATABASE_ADDRESS: String =
             "https://mayti-bbb73-default-rtdb.europe-west1.firebasedatabase.app/"
+
         val LIST_OF_GAMES: List<String> = listOf(
             "Minecraft PE",
             "Clash Royale",
@@ -25,6 +26,10 @@ class ExtraUtils {
             "PUBG: Mobile",
             "Standoff 2"
         )
+
+        const val AD_TEST_CODE: String = "ca-app-pub-3940256099942544/5224354917"
+        const val AD_NORMAL_CODE: String = "ca-app-pub-4406747838048228/7515642683"
+
     }
 
     fun getHash(string: String): String {
