@@ -92,6 +92,7 @@
             android:layout_margin="16dp"
             android:text="Написать"
             android:textAllCaps="false"
+            android:fontFamily="@font/rubik_bold"
             android:textColor="@color/black"
             app:backgroundTint="@color/white"
             app:icon="@drawable/ic_outline_sms_24"
