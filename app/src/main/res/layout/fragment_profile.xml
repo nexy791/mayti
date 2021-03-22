@@ -48,6 +48,7 @@
                 android:layout_alignParentLeft="true"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="center"
+                android:textAlignment="center"
                 android:text="В этом тексте +- 150 символов В этом тексте ровно 150 символов В этом тексте ровн"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/darkGray"
