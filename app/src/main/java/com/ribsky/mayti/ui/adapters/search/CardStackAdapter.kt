@@ -47,7 +47,7 @@ class CardStackAdapter(
                     (fragment.requireActivity() as MainActivity).currentCoin--
                     ExtraUtil().setLikes(
                         root.context,
-                        (fragment.requireActivity() as MainActivity).currentAccount.uid,
+                        (fragment.requireActivity() as MainActivity).getCurrentUser().uid,
                         (fragment.requireActivity() as MainActivity).currentCoin
                     )
 

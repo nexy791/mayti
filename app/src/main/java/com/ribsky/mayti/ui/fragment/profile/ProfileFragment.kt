@@ -45,15 +45,15 @@ class ProfileFragment : Fragment() {
         with((requireActivity() as MainActivity)) {
             binding.buttonLikes.text =
                 "Лайков: " + currentCoin
-            binding.textViewName.text = currentAccount.fln
-            binding.textViewDesc.text = currentAccount.bio
-            binding.imageViewAvatar.load(currentAccount.photo) {
+            binding.textViewName.text = getCurrentUser().fln
+            binding.textViewDesc.text = getCurrentUser().bio
+            binding.imageViewAvatar.load(getCurrentUser().photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())
             }
 
-            for (i in currentAccount.games) {
+            for (i in getCurrentUser().games) {
                 if (i >= 0) {
                     binding.chips.addView(Chip(requireContext()).apply {
                         text = ExtraUtil.LIST_OF_GAMES[i]
@@ -88,7 +88,7 @@ class ProfileFragment : Fragment() {
                     (requireActivity() as MainActivity).currentCoin++
                     ExtraUtil().setLikes(
                         requireContext(),
-                        (requireActivity() as MainActivity).currentAccount.uid,
+                        (requireActivity() as MainActivity).getCurrentUser().uid,
                         (requireActivity() as MainActivity).currentCoin
                     )
                     (requireActivity() as MainActivity).updateBadger()

@@ -8,16 +8,18 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.ribsky.mayti.model.user.UserModel
-import com.ribsky.mayti.presentation.view.main.MainContract
+import com.ribsky.mayti.presentation.view.main.MainActivityContract
 import com.ribsky.mayti.util.ExtraUtil
 
 
-class MainRepository : MainContract.Repository {
+class MainRepository : MainActivityContract.Repository {
 
     private val database: FirebaseDatabase =
         Firebase.database(ExtraUtil.FIREBASE_DATABASE_ADDRESS)
     private val databaseReference: DatabaseReference = database.reference
     private lateinit var dataSnapshot: DataSnapshot
+
+    lateinit var currentAccount: UserModel
 
     override fun getAuthUser(): FirebaseUser? {
         return Firebase.auth.currentUser
@@ -30,6 +32,17 @@ class MainRepository : MainContract.Repository {
         }.addOnFailureListener {
             callback.invoke(false)
         }
+    }
+
+    override fun getCurrentUser(): UserModel {
+        return currentAccount
+    }
+
+    override fun setCurrentUser(userModel: UserModel) {
+        currentAccount = userModel
+        val database: FirebaseDatabase =
+            Firebase.database(ExtraUtil.FIREBASE_DATABASE_ADDRESS)
+        database.reference.root.child(userModel.uid).setValue(userModel.toMap())
     }
 
     override fun getUsers(): ArrayList<UserModel> {

@@ -2,7 +2,7 @@ package com.ribsky.mayti.presentation.presenter.intro
 
 import com.ribsky.mayti.presentation.view.intro.Intro3Contract
 
-class Intro3FragmentPresenter(val mView: Intro3Contract.View) : Intro3Contract.Presenter {
+class Intro3FragmentPresenter(private val mView: Intro3Contract.View) : Intro3Contract.Presenter {
 
     override fun buttonNextClicked(bio: String) {
 

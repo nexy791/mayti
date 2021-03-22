@@ -119,6 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:fontFamily="@font/rubik_bold"
                 android:text="Написать"
                 android:textAllCaps="false"
                 android:textColor="@color/black"

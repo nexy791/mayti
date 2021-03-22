@@ -18,7 +18,7 @@ import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.ActivityMainBinding
 import com.ribsky.mayti.model.user.UserModel
 import com.ribsky.mayti.presentation.presenter.main.MainActivityPresenter
-import com.ribsky.mayti.presentation.view.main.MainContract
+import com.ribsky.mayti.presentation.view.main.MainActivityContract
 import com.ribsky.mayti.ui.activity.blocked.BlockedActivity
 import com.ribsky.mayti.ui.activity.settings.SettingsActivity
 import com.ribsky.mayti.util.AlertsUtil
@@ -29,12 +29,11 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : AppCompatActivity(), MainActivityContract.View {
 
-    private lateinit var mPresenter: MainContract.Presenter
+    private lateinit var mPresenter: MainActivityContract.Presenter
     private lateinit var binding: ActivityMainBinding
 
-    lateinit var currentAccount: UserModel
     var currentCoin: Int = 0
     var users: ArrayList<UserModel> = ArrayList()
 
@@ -163,18 +162,25 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         Firebase.auth.signOut()
     }
 
-    override fun startApp(user: UserModel, users: ArrayList<UserModel>) {
+    override fun startApp(users: ArrayList<UserModel>) {
         isLoaded = true
-        currentAccount = user
         this.users = users
         goFragment(0)
 
-        ExtraUtil().addReward(this, currentAccount.uid)
+        ExtraUtil().addReward(this, getCurrentUser().uid)
 
-        currentCoin = ExtraUtil().getLikes(this, currentAccount.uid)
+        currentCoin = ExtraUtil().getLikes(this, getCurrentUser().uid)
         updateBadger()
 
         EventBus.getDefault().post(users)
+    }
+
+    fun getCurrentUser(): UserModel {
+        return mPresenter.getCurrentUser()
+    }
+
+    fun setCurrentUser(userModel: UserModel) {
+        mPresenter.setCurrentUser(userModel)
     }
 
     override fun userBlocked() {
