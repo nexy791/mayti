@@ -182,10 +182,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         finish()
     }
 
-    fun getBinding(): ActivityMainBinding {
-        return binding
-    }
-
     fun sendUsers() {
         if (users.isNotEmpty()) EventBus.getDefault().post(users)
     }
