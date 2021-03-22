@@ -43,11 +43,11 @@ class ProfileFragment : Fragment() {
 
 
         with((requireActivity() as MainActivity)) {
-            binding.materialButton.text =
+            binding.buttonLikes.text =
                 "Лайков: " + currentCoin
-            binding.textView.text = currentAccount.fln
-            binding.textView2.text = currentAccount.bio
-            binding.imageView.load(currentAccount.photo) {
+            binding.textViewName.text = currentAccount.fln
+            binding.textViewDesc.text = currentAccount.bio
+            binding.imageViewAvatar.load(currentAccount.photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())
@@ -63,11 +63,11 @@ class ProfileFragment : Fragment() {
 
         }
 
-        binding.materialButton.setOnClickListener {
+        binding.buttonLikes.setOnClickListener {
             AlertsUtil(requireActivity()).alertLikesInfo(this)
         }
 
-        binding.btnAdd.setOnClickListener {
+        binding.buttonPlus.setOnClickListener {
             AlertsUtil(requireActivity()).alertLikesInfo(this)
         }
 
@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
                         (requireActivity() as MainActivity).currentCoin
                     )
                     (requireActivity() as MainActivity).updateBadger()
-                    binding.materialButton.text =
+                    binding.buttonLikes.text =
                         "Лайков: " + (requireActivity() as MainActivity).currentCoin
                 }
             } else {

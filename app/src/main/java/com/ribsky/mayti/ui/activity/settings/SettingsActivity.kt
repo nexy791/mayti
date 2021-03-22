@@ -2,14 +2,16 @@ package com.ribsky.mayti.ui.activity.settings
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.ActivitySettingsBinding
-import com.ribsky.mayti.ui.fragment.settings.SettingsFragment
 
 class SettingsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySettingsBinding
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +23,8 @@ class SettingsActivity : AppCompatActivity() {
             super.onBackPressed()
         }
 
-        supportFragmentManager.commit {
-            replace(binding.container.id, SettingsFragment())
-            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit()
-        }
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController.navigate(R.id.settingsFragment)
 
     }
 }

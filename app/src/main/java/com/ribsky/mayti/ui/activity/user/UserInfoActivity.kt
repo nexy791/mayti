@@ -35,15 +35,15 @@ class UserInfoActivity : AppCompatActivity() {
         user = (intent.getParcelableExtra<UserModelParcelable>("user")!!).fromParcelable()
         currentCoin = ExtraUtil().getLikes(this, Firebase.auth.currentUser.uid)
 
-        binding.textView.text = user.fln
-        binding.textView2.text = user.bio
+        binding.textViewName.text = user.fln
+        binding.textViewDesc.text = user.bio
 
-        binding.imageView.load(user.photo) {
+        binding.imageViewAvatar.load(user.photo) {
             crossfade(true)
             placeholder(R.drawable.ic_launcher_playstore)
             transformations(CircleCropTransformation())
         }
-        binding.send.setOnClickListener {
+        binding.fabSend.setOnClickListener {
             if (currentCoin > 0
             ) {
                 currentCoin--
@@ -71,7 +71,7 @@ class UserInfoActivity : AppCompatActivity() {
 
         }
 
-        binding.report.setOnClickListener {
+        binding.fabReport.setOnClickListener {
             AlertsUtil(this).alertSupport()
         }
 
@@ -84,7 +84,7 @@ class UserInfoActivity : AppCompatActivity() {
         }
 
 
-        binding.close.setOnClickListener {
+        binding.fabClose.setOnClickListener {
             onBackPressed()
         }
         binding.toolBar.setNavigationOnClickListener {

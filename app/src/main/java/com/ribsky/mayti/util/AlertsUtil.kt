@@ -18,7 +18,7 @@ class AlertsUtil(private val activity: Activity) {
             setPositiveButton("Выход") { _, _ -> activity.finish() }
             setNegativeButton(
                 "Отмена"
-            ) { _, _ -> activity.finish() }
+            ) { _, _ -> }
             show()
         }
 

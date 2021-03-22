@@ -6,7 +6,8 @@ import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.FirebaseAuth
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -18,14 +19,22 @@ import com.ribsky.mayti.util.AlertsUtil
 import com.ribsky.mayti.util.ExtraUtil
 
 class SettingsFragment : PreferenceFragmentCompat() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = MaterialFadeThrough()
+        enterTransition = MaterialFadeThrough()
+    }
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
         addPreferencesFromResource(R.xml.preferences)
 
         findPreference<Preference>("pref_rate")?.setOnPreferenceClickListener {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=com.ribsky.mayti")
+                    Uri.parse("https://play.google.com/store/apps/details?id=${requireContext().packageName}")
                 )
             )
             true
@@ -36,7 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             sendIntent.action = Intent.ACTION_SEND
             sendIntent.putExtra(
                 Intent.EXTRA_TEXT,
-                "mayti - сообщество поиска тиммейтов для любых игр.\n\nhttps://play.google.com/store/apps/details?id=com.ribsky.mayti"
+                "mayti - сообщество поиска тиммейтов для любых игр.\n\nhttps://play.google.com/store/apps/details?id=${requireContext().packageName}"
             )
             sendIntent.type = "text/plain"
             startActivity(Intent.createChooser(sendIntent, null))
@@ -79,9 +88,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
                     startActivity(Intent(requireActivity(), SplashActivity::class.java))
                     val database: FirebaseDatabase =
                         Firebase.database(ExtraUtil.FIREBASE_DATABASE_ADDRESS)
-                    database.reference.root.child(FirebaseAuth.getInstance().currentUser.uid)
+                    database.reference.root.child(Firebase.auth.currentUser.uid)
                         .setValue(null)
-                    FirebaseAuth.getInstance().signOut()
+                    Firebase.auth.signOut()
                     requireActivity().finish()
                 }
                 setNegativeButton("нет") { _, _ -> }
@@ -97,7 +106,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 setCancelable(true)
                 setPositiveButton("Выйти") { _, _ ->
                     startActivity(Intent(requireActivity(), SplashActivity::class.java))
-                    FirebaseAuth.getInstance().signOut()
+                    Firebase.auth.signOut()
                     requireActivity().finish()
                 }
                 setNegativeButton("нет") { _, _ -> }

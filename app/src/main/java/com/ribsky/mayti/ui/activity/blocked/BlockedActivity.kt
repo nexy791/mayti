@@ -15,7 +15,7 @@ class BlockedActivity : AppCompatActivity() {
         binding = ActivityBlockedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.support.setOnClickListener {
+        binding.fabSupport.setOnClickListener {
             AlertsUtil(this).alertSupport()
         }
     }

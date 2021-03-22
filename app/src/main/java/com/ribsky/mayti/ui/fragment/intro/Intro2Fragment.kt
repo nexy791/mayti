@@ -46,7 +46,7 @@ class Intro2Fragment : Fragment() {
         initRecyclerView()
 
 
-        binding.fab.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
 
             val checkIds: ArrayList<Int> = ArrayList()
             for ((index, value) in games.withIndex()) {
@@ -104,14 +104,14 @@ class Intro2Fragment : Fragment() {
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 || dy < 0 && binding.fab.isShown) {
-                    binding.fab.hide()
+                if (dy > 0 || dy < 0 && binding.buttonNext.isShown) {
+                    binding.buttonNext.hide()
                 }
             }
 
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.fab.show()
+                    binding.buttonNext.show()
                 }
                 super.onScrollStateChanged(recyclerView, newState)
             }

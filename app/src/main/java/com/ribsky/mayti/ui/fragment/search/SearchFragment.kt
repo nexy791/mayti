@@ -67,7 +67,7 @@ class SearchFragment : Fragment(), CardStackListener {
         binding.cardStackView.adapter = CardStackAdapter(usersInList, this)
 
 
-        binding.send.setOnClickListener {
+        binding.btnRepeat.setOnClickListener {
             (requireActivity() as MainActivity).goFragment(0)
         }
 
@@ -90,10 +90,6 @@ class SearchFragment : Fragment(), CardStackListener {
         }
     }
 
-    override fun onCardDragging(direction: Direction?, ratio: Float) {
-
-    }
-
     override fun onCardSwiped(direction: Direction?) {
         if (binding.cardStackView.adapter!!.itemCount == (binding.cardStackView.layoutManager as CardStackLayoutManager).topPosition) {
 
@@ -107,9 +103,13 @@ class SearchFragment : Fragment(), CardStackListener {
             } else {
                 TransitionManager.beginDelayedTransition(binding.root, MaterialFadeThrough())
                 binding.cardStackView.visibility = View.GONE
-                binding.empty.visibility = View.VISIBLE
+                binding.emptyState.visibility = View.VISIBLE
             }
         }
+
+    }
+
+    override fun onCardDragging(direction: Direction?, ratio: Float) {
 
     }
 

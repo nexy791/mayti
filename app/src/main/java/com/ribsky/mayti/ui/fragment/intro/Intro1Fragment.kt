@@ -59,17 +59,18 @@ class Intro1Fragment : Fragment() {
             signIn()
         }
 
-        binding.textView4.text = HtmlCompat.fromHtml(
+        binding.textViewPrivacy.text = HtmlCompat.fromHtml(
             "<u>Продолжая, я принимаю правила и политику конфиденциальности</u>",
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
 
-        binding.textView4.setOnClickListener {
-            val browserIntent = Intent(
-                Intent.ACTION_VIEW,
-                Uri.parse(ExtraUtil.LINK_PRIVACY_POLICY)
+        binding.textViewPrivacy.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(ExtraUtil.LINK_PRIVACY_POLICY)
+                )
             )
-            startActivity(browserIntent)
         }
 
         return binding.root

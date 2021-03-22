@@ -30,10 +30,10 @@ class CardStackAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val spot = spots[position]
         with(holder.binding) {
-            textView.text = spot.fln
-            textView2.text = spot.bio
+            textViewName.text = spot.fln
+            textViewDesc.text = spot.bio
 
-            imageView.load(spot.photo) {
+            imageViewAvatar.load(spot.photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())
@@ -41,7 +41,7 @@ class CardStackAdapter(
 
 
 
-            send.setOnClickListener {
+            fabSend.setOnClickListener {
                 if ((fragment.requireActivity() as MainActivity).currentCoin > 0
                 ) {
                     (fragment.requireActivity() as MainActivity).currentCoin--
@@ -70,11 +70,11 @@ class CardStackAdapter(
 
             }
 
-            report.setOnClickListener {
+            fabReport.setOnClickListener {
                 AlertsUtil(fragment.requireActivity()).alertSupport()
             }
 
-            close.setOnClickListener {
+            fabClose.setOnClickListener {
                 fragment.swipeClose()
             }
 

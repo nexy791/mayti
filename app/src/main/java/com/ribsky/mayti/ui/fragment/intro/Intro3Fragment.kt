@@ -36,13 +36,13 @@ class Intro3Fragment : Fragment() {
         _binding = FragmentIntro3Binding.inflate(inflater, container, false)
 
 
-        binding.button.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
 
-            if (binding.textInputLayout.editText!!.text.toString().length <= 150) {
+            if (binding.textInputLayoutBio.editText!!.text.toString().length <= 150) {
 
                 with((requireActivity() as IntroActivity)) {
-                    if (binding.textInputLayout.editText!!.text.toString().isNotEmpty()) {
-                        currentAccount.bio = binding.textInputLayout.editText!!.text.toString()
+                    if (binding.textInputLayoutBio.editText!!.text.toString().isNotEmpty()) {
+                        currentAccount.bio = binding.textInputLayoutBio.editText!!.text.toString()
                     }
                     writeUser(currentAccount)
                     goFragment(3)

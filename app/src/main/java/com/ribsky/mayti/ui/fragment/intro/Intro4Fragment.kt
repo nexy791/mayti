@@ -42,29 +42,29 @@ class Intro4Fragment : Fragment() {
         _binding = FragmentIntro4Binding.inflate(inflater, container, false)
 
 
-        binding.button.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
 
-            if (binding.textInputLayout.editText!!.text.toString().isNotEmpty()) {
+            if (binding.textInputLayoutBio.editText!!.text.toString().isNotEmpty()) {
 
                 with((requireActivity() as IntroActivity)) {
                     currentAccount.social =
-                        "https://vk.com/" + binding.textInputLayout.editText!!.text.toString()
+                        "https://vk.com/" + binding.textInputLayoutBio.editText!!.text.toString()
                     writeUser(currentAccount)
                     goFragment(4)
 
                 }
             } else {
-                binding.textInputLayout.error = "Необходимо указать ВК"
+                binding.textInputLayoutBio.error = "Необходимо указать ВК"
             }
         }
 
-        binding.textInputLayout.editText!!.addTextChangedListener(object : TextWatcher {
+        binding.textInputLayoutBio.editText!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.textInputLayout.error = null
+                binding.textInputLayoutBio.error = null
             }
 
             override fun afterTextChanged(s: Editable?) {

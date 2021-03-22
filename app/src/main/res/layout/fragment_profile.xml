@@ -18,7 +18,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/layoutHeader"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/gradient"
@@ -29,10 +29,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewAvatar"
                 android:layout_width="86dp"
                 android:layout_height="86dp"
-                android:layout_above="@+id/textView"
+                android:layout_above="@+id/textViewName"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:src="@drawable/ic_launcher_playstore"
@@ -40,7 +40,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textViewName"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_alignParentStart="true"
@@ -52,76 +52,73 @@
                 android:text="Аккаунт создан"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewAvatar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintStart_toEndOf="@+id/imageViewAvatar"
+                app:layout_constraintTop_toTopOf="@+id/imageViewAvatar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/content"
+            android:id="@+id/layoutContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+            app:layout_constraintTop_toBottomOf="@+id/layoutHeader">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textViewDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:fontFamily="@font/rubik_light"
                 android:gravity="start|center"
-                android:text="волов В этом тексте ровно 150 символов В этом тексте ровно 150 символов В этом тексте ровн"
+                android:text="В этом тексте +- 150 символов В этом тексте ровно 150 символов В этом тексте ровн"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="@color/darkGray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <RelativeLayout
-                android:id="@+id/relativeLayout"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonLikes"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/rubik_bold"
+                android:text="Лайков: 3"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_outline_favorite_border_24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/materialButton"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="Лайков: 3"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:cornerRadius="16dp"
-                    app:icon="@drawable/ic_outline_favorite_border_24" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDesc" />
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_add"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="56dp"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/materialButton"
-                    android:layout_alignBottom="@+id/materialButton"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@+id/materialButton"
-                    android:layout_toRightOf="@+id/materialButton"
-                    android:fontFamily="@font/rubik_bold"
-                    android:text="+"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    app:cornerRadius="16dp"
-                    app:layout_constraintDimensionRatio="1:1" />
-            </RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonPlus"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/buttonLikes"
+                android:layout_alignBottom="@+id/buttonLikes"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_toEndOf="@+id/buttonLikes"
+                android:layout_toRightOf="@+id/buttonLikes"
+                android:fontFamily="@font/rubik_bold"
+                android:text="+"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                app:cornerRadius="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonLikes"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@+id/buttonLikes"
+                app:layout_constraintTop_toTopOf="@+id/buttonLikes" />
 
 
             <com.google.android.material.chip.ChipGroup
@@ -129,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+                app:layout_constraintTop_toBottomOf="@+id/buttonLikes">
 
             </com.google.android.material.chip.ChipGroup>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,15 +33,15 @@ class Intro5Fragment : Fragment() {
     ): View {
         _binding = FragmentIntro5Binding.inflate(inflater, container, false)
         with((requireActivity() as IntroActivity)) {
-            binding.textView.text = currentAccount.fln
-            binding.imageView.load(currentAccount.photo) {
+            binding.textViewHeader.text = currentAccount.fln
+            binding.introImage.load(currentAccount.photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())
             }
         }
 
-        binding.fab.setOnClickListener {
+        binding.buttonNext.setOnClickListener {
             startActivity(Intent(requireContext(), MainActivity::class.java))
             requireActivity().finish()
         }

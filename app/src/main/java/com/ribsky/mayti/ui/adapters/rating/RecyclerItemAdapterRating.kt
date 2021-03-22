@@ -24,8 +24,8 @@ class RecyclerItemAdapterRating(modelList: ArrayList<UserModel>) :
     override fun onBindViewHolder(holder: UsersSheetHolder, position: Int) {
         val model: UserModel = mModelList[position]
         with(holder) {
-            binding.title.text = model.fln
-            binding.imageView2.load(model.photo) {
+            binding.textViewName.text = model.fln
+            binding.imageViewAvatar.load(model.photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())
