@@ -4,7 +4,7 @@ import com.ribsky.mayti.model.user.UserModel
 import com.ribsky.mayti.presentation.view.main.MainContract
 import com.ribsky.mayti.repository.main.MainRepository
 
-class MainPresenter(val mView: MainContract.View) : MainContract.Presenter {
+class MainActivityPresenter(val mView: MainContract.View) : MainContract.Presenter {
 
     private val mRepository: MainContract.Repository = MainRepository()
 
@@ -25,7 +25,7 @@ class MainPresenter(val mView: MainContract.View) : MainContract.Presenter {
                 }
 
                 if (isOk) {
-                    if (user!!.social.isNotEmpty()) {
+                    if (user!!.social.isNotBlank()) {
 
                         if (!user.isBlocked) {
                             mView.startApp(user, users)

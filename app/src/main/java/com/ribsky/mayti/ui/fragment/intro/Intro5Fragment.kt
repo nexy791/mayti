@@ -33,8 +33,8 @@ class Intro5Fragment : Fragment() {
     ): View {
         _binding = FragmentIntro5Binding.inflate(inflater, container, false)
         with((requireActivity() as IntroActivity)) {
-            binding.textViewHeader.text = currentAccount.fln
-            binding.introImage.load(currentAccount.photo) {
+            binding.textViewHeader.text = getCurrentUser().fln
+            binding.introImage.load(getCurrentUser().photo) {
                 crossfade(true)
                 placeholder(R.drawable.ic_launcher_playstore)
                 transformations(CircleCropTransformation())

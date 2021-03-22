@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutBio"
+        android:id="@+id/textInputLayoutSocial"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -78,8 +78,8 @@
         android:text="Продолжить"
         android:textAllCaps="false"
         app:cornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutBio"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutBio" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutSocial"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSocial" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

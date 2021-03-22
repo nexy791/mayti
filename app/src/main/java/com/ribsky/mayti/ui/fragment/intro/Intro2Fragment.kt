@@ -8,21 +8,22 @@ import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.FragmentIntro2Binding
 import com.ribsky.mayti.model.game.GameModel
-import com.ribsky.mayti.model.user.UserModel
+import com.ribsky.mayti.presentation.presenter.intro.Intro2FragmentPresenter
+import com.ribsky.mayti.presentation.view.intro.Intro2Contract
 import com.ribsky.mayti.ui.activity.intro.IntroActivity
 import com.ribsky.mayti.ui.adapters.game.RecyclerViewAdapterGames
 import com.ribsky.mayti.ui.adapters.utils.RecyclerItemClickListener
 import com.ribsky.mayti.util.ExtraUtil
 
 
-class Intro2Fragment : Fragment() {
+class Intro2Fragment : Fragment(), Intro2Contract.View {
+
+    private lateinit var mPresenter: Intro2Contract.Presenter
 
     private var _binding: FragmentIntro2Binding? = null
     private val binding get() = _binding!!
@@ -33,6 +34,8 @@ class Intro2Fragment : Fragment() {
         super.onCreate(savedInstanceState)
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
+
+        mPresenter = Intro2FragmentPresenter(this)
     }
 
     override fun onCreateView(
@@ -47,32 +50,17 @@ class Intro2Fragment : Fragment() {
 
 
         binding.buttonNext.setOnClickListener {
-
             val checkIds: ArrayList<Int> = ArrayList()
             for ((index, value) in games.withIndex()) {
                 if (value.checked) {
                     checkIds.add(index)
                 }
             }
-            with((requireActivity() as IntroActivity)) {
-                if (checkIds.isNotEmpty()) {
-                    currentAccount.games = checkIds
-                    writeUser(currentAccount)
-                }
-                goFragment(2)
-            }
-
+            mPresenter.buttonNextClicked(checkIds)
         }
 
 
         return binding.root
-    }
-
-    fun writeUser(model: UserModel) {
-        val database: FirebaseDatabase =
-            Firebase.database(ExtraUtil.FIREBASE_DATABASE_ADDRESS)
-        database.reference.root.child(model.uid).setValue(model.toMap())
-        (requireActivity() as IntroActivity).currentAccount = model
     }
 
     private fun initRecyclerView() {
@@ -125,6 +113,24 @@ class Intro2Fragment : Fragment() {
             arrayList.add(GameModel(index, value, false))
         }
         games = arrayList
+    }
+
+
+    override fun writeUser(checkIds: ArrayList<Int>) {
+        with((requireActivity() as IntroActivity)) {
+            val newCurrentAccount = getCurrentUser()
+            newCurrentAccount.games = checkIds
+            setCurrentUser(newCurrentAccount)
+        }
+    }
+
+    override fun goFragment() {
+        (requireActivity() as IntroActivity).goFragment(2)
+    }
+
+    override fun showError(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).setAnchorView(binding.buttonNext)
+            .show()
     }
 
     override fun onDestroyView() {

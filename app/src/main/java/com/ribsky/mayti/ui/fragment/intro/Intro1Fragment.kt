@@ -16,8 +16,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.FragmentIntro1Binding
@@ -78,16 +76,17 @@ class Intro1Fragment : Fragment() {
 
 
     fun signIn() {
-        val signInIntent: Intent = mGoogleSignInClient.signInIntent
-        startActivityForResult(signInIntent, ExtraUtil.REQUEST_CODE_REGISTER_FIREBASE)
+        startActivityForResult(
+            mGoogleSignInClient.signInIntent,
+            ExtraUtil.REQUEST_CODE_REGISTER_FIREBASE
+        )
         binding.circularProgressIndicator.show()
     }
 
-    fun writeUser(model: UserModel) {
-        val database: FirebaseDatabase =
-            Firebase.database(ExtraUtil.FIREBASE_DATABASE_ADDRESS)
-        database.reference.root.child(model.uid).setValue(model.toMap())
-        (requireActivity() as IntroActivity).currentAccount = model
+    fun showError() {
+        binding.circularProgressIndicator.hide()
+        Snackbar.make(binding.root, "Произошла ошибка", Snackbar.LENGTH_LONG)
+            .show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -103,7 +102,7 @@ class Intro1Fragment : Fragment() {
                             binding.circularProgressIndicator.hide()
                             (requireActivity() as IntroActivity).goFragment(1)
                             with(mAuth.currentUser) {
-                                writeUser(
+                                (requireActivity() as IntroActivity).setCurrentUser(
                                     UserModel(
                                         uid, displayName, "",
                                         photoUrl.toString(), listOf(-1), "", false
@@ -111,14 +110,11 @@ class Intro1Fragment : Fragment() {
                                 )
                             }
                         } else {
-                            binding.circularProgressIndicator.hide()
-                            Snackbar.make(binding.root, "Произошла ошибка", Snackbar.LENGTH_LONG)
-                                .show()
+                            showError()
                         }
                     }
             } catch (e: ApiException) {
-                binding.circularProgressIndicator.hide()
-                Snackbar.make(binding.root, "Произошла ошибка", Snackbar.LENGTH_LONG).show()
+                showError()
             }
         }
     }

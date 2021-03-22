@@ -17,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.ActivityMainBinding
 import com.ribsky.mayti.model.user.UserModel
-import com.ribsky.mayti.presentation.presenter.main.MainPresenter
+import com.ribsky.mayti.presentation.presenter.main.MainActivityPresenter
 import com.ribsky.mayti.presentation.view.main.MainContract
 import com.ribsky.mayti.ui.activity.blocked.BlockedActivity
 import com.ribsky.mayti.ui.activity.settings.SettingsActivity
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         navController = Navigation.findNavController(this@MainActivity, R.id.nav_host_fragment)
 
-        mPresenter = MainPresenter(this)
+        mPresenter = MainActivityPresenter(this)
         mPresenter.onCreate()
 
         initNavigationView()

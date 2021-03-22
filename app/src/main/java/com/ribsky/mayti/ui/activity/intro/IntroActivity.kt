@@ -9,9 +9,13 @@ import androidx.navigation.Navigation
 import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.ActivityIntroBinding
 import com.ribsky.mayti.model.user.UserModel
+import com.ribsky.mayti.presentation.presenter.intro.IntroActivityPresenter
+import com.ribsky.mayti.presentation.view.intro.IntroActivityContract
 import com.ribsky.mayti.util.AlertsUtil
 
-class IntroActivity : AppCompatActivity() {
+class IntroActivity : AppCompatActivity(), IntroActivityContract.View {
+
+    private lateinit var mPresenter: IntroActivityContract.Presenter
 
     private lateinit var binding: ActivityIntroBinding
 
@@ -28,14 +32,13 @@ class IntroActivity : AppCompatActivity() {
     private val listTitles: List<String> =
         listOf("Знакомство 1/4", "Выбери игры 2/4", "Почти всё 3/4", "Связь 4/4", "Готово")
 
-
-    lateinit var currentAccount: UserModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolBar)
+
+        mPresenter = IntroActivityPresenter(this)
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         goFragment(0)
@@ -50,6 +53,15 @@ class IntroActivity : AppCompatActivity() {
         }
         return true
     }
+
+    fun getCurrentUser(): UserModel {
+        return mPresenter.getCurrentUser()
+    }
+
+    fun setCurrentUser(userModel: UserModel) {
+        mPresenter.setCurrentUser(userModel)
+    }
+
 
     fun goFragment(i: Int) {
         navController.navigate(listFragments[i])
