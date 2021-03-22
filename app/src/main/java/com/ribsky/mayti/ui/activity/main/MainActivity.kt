@@ -26,7 +26,6 @@ import com.ribsky.mayti.util.ExtraUtil
 import com.ribsky.mayti.util.RateApp
 import org.greenrobot.eventbus.EventBus
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), MainActivityContract.View {
@@ -35,8 +34,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
     private lateinit var binding: ActivityMainBinding
 
     var currentCoin: Int = 0
-    var users: ArrayList<UserModel> = ArrayList()
-
 
     private var isLoaded: Boolean = false
     var mRewardedAd: RewardedAd? = null
@@ -164,7 +161,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
 
     override fun startApp(users: ArrayList<UserModel>) {
         isLoaded = true
-        this.users = users
         goFragment(0)
 
         ExtraUtil().addReward(this, getCurrentUser().uid)
@@ -173,6 +169,10 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
         updateBadger()
 
         EventBus.getDefault().post(users)
+    }
+
+    fun getUsers(): ArrayList<UserModel> {
+        return mPresenter.getUsers()
     }
 
     fun getCurrentUser(): UserModel {
@@ -189,7 +189,7 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
     }
 
     fun sendUsers() {
-        if (users.isNotEmpty()) EventBus.getDefault().post(users)
+        EventBus.getDefault().post(getUsers())
     }
 
     fun goFragment(i: Int) {

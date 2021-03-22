@@ -45,4 +45,8 @@ class MainActivityPresenter(private val mView: MainActivityContract.View) :
     override fun setCurrentUser(userModel: UserModel) {
         mRepository.setCurrentUser(userModel)
     }
+
+    override fun getUsers(): ArrayList<UserModel> {
+        return mRepository.getUsers()
+    }
 }

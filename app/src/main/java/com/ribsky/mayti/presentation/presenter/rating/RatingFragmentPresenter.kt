@@ -2,15 +2,16 @@ package com.ribsky.mayti.presentation.presenter.rating
 
 import com.ribsky.mayti.model.user.UserModel
 import com.ribsky.mayti.presentation.view.rating.RatingFragmentContract
-import com.ribsky.mayti.ui.activity.main.MainActivity
 
 class RatingFragmentPresenter(private val mView: RatingFragmentContract.View) :
     RatingFragmentContract.Presenter {
 
     private var users: ArrayList<UserModel> = ArrayList()
     private var isAll: Boolean = false
+    private var usersAll: ArrayList<UserModel> = ArrayList()
 
-    override fun onCreate() {
+    override fun onCreate(usersAll: ArrayList<UserModel>) {
+        this.usersAll = usersAll
         loadNextDataFromApi(0, 10)
     }
 
@@ -22,15 +23,14 @@ class RatingFragmentPresenter(private val mView: RatingFragmentContract.View) :
         mView.openProfile(users[position])
     }
 
-    fun loadNextDataFromApi(offset: Int, offset1: Int) {
+    private fun loadNextDataFromApi(offset: Int, offset1: Int) {
         for (i in offset..offset1) {
-            if (i < (requireActivity() as MainActivity).users.size) {
-                users.add((requireActivity() as MainActivity).users.asReversed()[i])
+            if (i < usersAll.size) {
+                users.add(usersAll.asReversed()[i])
             } else {
                 isAll = true
             }
         }
-        binding.recyclerView.adapter!!.notifyDataSetChanged()
+        mView.onNotifyDataSetChanged(users)
     }
-
 }

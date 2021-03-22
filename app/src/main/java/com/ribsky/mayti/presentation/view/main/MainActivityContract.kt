@@ -16,6 +16,7 @@ class MainActivityContract {
         fun onCreate()
         fun getCurrentUser(): UserModel
         fun setCurrentUser(userModel: UserModel)
+        fun getUsers(): ArrayList<UserModel>
     }
 
     interface Repository {

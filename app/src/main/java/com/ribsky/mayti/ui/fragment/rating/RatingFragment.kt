@@ -27,12 +27,17 @@ class RatingFragment : Fragment(), RatingFragmentContract.View {
 
     private var _binding: FragmentRatingBinding? = null
     private val binding get() = _binding!!
+    private lateinit var activity: MainActivity
+
+
+    private var users: ArrayList<UserModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
 
+        activity = requireActivity() as MainActivity
         mPresenter = RatingFragmentPresenter(this)
 
     }
@@ -46,9 +51,15 @@ class RatingFragment : Fragment(), RatingFragmentContract.View {
         _binding = FragmentRatingBinding.inflate(inflater, container, false)
 
         initRecyclerView()
-        mPresenter.onCreate()
+        mPresenter.onCreate(activity.getUsers())
 
         return binding.root
+    }
+
+    override fun onNotifyDataSetChanged(users: ArrayList<UserModel>) {
+        this.users.clear()
+        this.users.addAll(users)
+        binding.recyclerView.adapter!!.notifyDataSetChanged()
     }
 
 
@@ -59,7 +70,7 @@ class RatingFragment : Fragment(), RatingFragmentContract.View {
 
 
         binding.recyclerView.adapter =
-            RecyclerItemAdapterRating(ArrayList())
+            RecyclerItemAdapterRating(users)
 
 
         binding.recyclerView.addOnItemTouchListener(
@@ -68,7 +79,7 @@ class RatingFragment : Fragment(), RatingFragmentContract.View {
                 binding.recyclerView,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View?, position: Int) {
-
+                        mPresenter.onItemClick(position)
                     }
 
                     override fun onLongItemClick(view: View?, position: Int) {
@@ -102,11 +113,11 @@ class RatingFragment : Fragment(), RatingFragmentContract.View {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == ExtraUtil.RESULT_INFO) {
-            (requireActivity() as MainActivity).currentCoin = ExtraUtil().getLikes(
+            activity.currentCoin = ExtraUtil().getLikes(
                 requireContext(),
-                (requireActivity() as MainActivity).getCurrentUser().uid
+                activity.getCurrentUser().uid
             )
-            (requireActivity() as MainActivity).updateBadger()
+            activity.updateBadger()
         }
 
     }
