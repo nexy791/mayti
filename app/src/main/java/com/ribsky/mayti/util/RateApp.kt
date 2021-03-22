@@ -13,7 +13,7 @@ class RateApp(private val context: Context) {
     private val alertTitle: String = "Оценить"
     private val alertBody: String =
         "Если тебе нравится приложение ${context.getString(R.string.app_name)}, пожалуйста, оцените его!"
-    private val range: Int = 3
+    private val range: Int = 4
 
 
     private fun showDialog() {
