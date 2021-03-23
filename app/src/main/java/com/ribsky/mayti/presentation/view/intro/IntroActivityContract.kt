@@ -9,13 +9,11 @@ class IntroActivityContract {
     interface Presenter {
         fun getCurrentUser(): UserModel
         fun setCurrentUser(userModel: UserModel)
-
     }
 
     interface Repository {
         fun getCurrentUser(): UserModel
         fun setCurrentUser(userModel: UserModel)
-
     }
 
 }

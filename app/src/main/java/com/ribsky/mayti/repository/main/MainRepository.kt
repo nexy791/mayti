@@ -20,6 +20,7 @@ class MainRepository : MainActivityContract.Repository {
     private lateinit var dataSnapshot: DataSnapshot
 
     lateinit var currentAccount: UserModel
+    private var users: ArrayList<UserModel> = ArrayList()
 
     override fun getAuthUser(): FirebaseUser? {
         return Firebase.auth.currentUser
@@ -46,25 +47,29 @@ class MainRepository : MainActivityContract.Repository {
     }
 
     override fun getUsers(): ArrayList<UserModel> {
-        val arrayList: ArrayList<UserModel> = ArrayList()
-        dataSnapshot.children.forEach {
+        if (users.isEmpty()) {
+            val arrayList: ArrayList<UserModel> = ArrayList()
+            dataSnapshot.children.forEach {
 
-            if (!(it.child("isBlocked").value as Boolean) && (it.child("social").value as String).isNotBlank()
-            ) {
-                arrayList.add(
-                    UserModel(
-                        it.child("uid").value as String,
-                        it.child("fln").value as String,
-                        it.child("bio").value as String,
-                        it.child("photo").value as String,
-                        (it.child("games").value as List<Long>).map { it1 -> it1.toInt() },
-                        it.child("social").value as String,
-                        it.child("isBlocked").value as Boolean
+                if (!(it.child("isBlocked").value as Boolean) && (it.child("social").value as String).isNotBlank()
+                ) {
+                    arrayList.add(
+                        UserModel(
+                            it.child("uid").value as String,
+                            it.child("fln").value as String,
+                            it.child("bio").value as String,
+                            it.child("photo").value as String,
+                            (it.child("games").value as List<Long>).map { it1 -> it1.toInt() },
+                            it.child("social").value as String,
+                            it.child("isBlocked").value as Boolean
+                        )
                     )
-                )
+                }
             }
-        }
-        return arrayList
+            users = arrayList
+            return arrayList
+        } else return users
+
     }
 
 
