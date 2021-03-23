@@ -23,7 +23,7 @@
 ## ⚛ Зависимости
 
 * [coil](https://github.com/coil-kt/coil)
-* [EventBus](https://github.com/greenrobot/EventBus)
+* [Secure-preferences](https://github.com/scottyab/secure-preferences)
 * [CardStackView](https://github.com/yuyakaido/CardStackView)
 
 ## ✨ Использование
