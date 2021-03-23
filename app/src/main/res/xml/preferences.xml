@@ -70,7 +70,7 @@
             app:icon="@drawable/ic_outline_copyright_24"
             app:key="pref_sec"
             app:summary="Все права принадлежат их владельцам"
-            app:title="Права">
+            app:title="Интеллектуальное право">
 
         </Preference>
 
@@ -94,7 +94,7 @@
             app:icon="@drawable/ic_outline_info_24"
             app:key="pref_info"
             app:summary="Версия приложения"
-            app:title="1.0.0">
+            app:title="1.1.0">
 
         </Preference>
 

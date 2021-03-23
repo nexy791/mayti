@@ -9,50 +9,35 @@ import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialFadeThrough
 import com.ribsky.mayti.databinding.FragmentSearchBinding
 import com.ribsky.mayti.model.user.UserModel
+import com.ribsky.mayti.presentation.presenter.search.SearchFragmentPresenter
+import com.ribsky.mayti.presentation.view.search.SearchFragmentContract
 import com.ribsky.mayti.ui.activity.main.MainActivity
 import com.ribsky.mayti.ui.adapters.search.CardStackAdapter
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 
 
-class SearchFragment : Fragment(), CardStackListener {
+class SearchFragment : Fragment(), CardStackListener, SearchFragmentContract.View {
 
+    private var usersInList: ArrayList<UserModel> = ArrayList()
+    private lateinit var mPresenter: SearchFragmentContract.Presenter
 
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private var users: ArrayList<UserModel> = ArrayList()
-    private var isAll: Boolean = false
-    private var usersInList: ArrayList<UserModel> = ArrayList()
+
+    private lateinit var activity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
 
-    }
+        activity = requireActivity() as MainActivity
+        mPresenter = SearchFragmentPresenter(this)
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
-        (requireActivity() as MainActivity).sendUsers()
-    }
 
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
-
-    @Subscribe
-    fun onEvent(users: ArrayList<UserModel>) {
-        this.users.clear()
-        this.users.addAll(users)
-        this.users.shuffle()
-        loadNextDataFromApi(0, 10)
     }
 
     override fun onCreateView(
@@ -66,6 +51,9 @@ class SearchFragment : Fragment(), CardStackListener {
         binding.cardStackView.layoutManager = CardStackLayoutManager(requireContext(), this)
         binding.cardStackView.adapter = CardStackAdapter(usersInList, this)
 
+        mPresenter.onCreate(activity.getUsers())
+
+
 
         binding.btnRepeat.setOnClickListener {
             (requireActivity() as MainActivity).goFragment(0)
@@ -74,43 +62,32 @@ class SearchFragment : Fragment(), CardStackListener {
         return binding.root
     }
 
+    override fun updateCardStackView(i: Int, users: UserModel) {
+        usersInList.add(users)
+        binding.cardStackView.adapter!!.notifyItemInserted(i)
+    }
+
 
     fun swipeClose() {
         binding.cardStackView.swipe()
     }
 
-    fun loadNextDataFromApi(offset: Int, offset1: Int) {
-        for (i in offset..offset1) {
-            if (i < users.size) {
-                usersInList.add(users[i])
-                binding.cardStackView.adapter!!.notifyItemInserted(i)
-            } else {
-                isAll = true
-            }
-        }
+    override fun emptyVisible() {
+        TransitionManager.beginDelayedTransition(binding.root, MaterialFadeThrough())
+        binding.cardStackView.visibility = View.GONE
+        binding.emptyState.visibility = View.VISIBLE
     }
+
 
     override fun onCardSwiped(direction: Direction?) {
         if (binding.cardStackView.adapter!!.itemCount == (binding.cardStackView.layoutManager as CardStackLayoutManager).topPosition) {
-
-            if (!isAll) {
-                val pos: Int =
-                    (binding.cardStackView.layoutManager as CardStackLayoutManager).topPosition + 10
-                loadNextDataFromApi(
-                    (binding.cardStackView.layoutManager as CardStackLayoutManager).topPosition,
-                    pos
-                )
-            } else {
-                TransitionManager.beginDelayedTransition(binding.root, MaterialFadeThrough())
-                binding.cardStackView.visibility = View.GONE
-                binding.emptyState.visibility = View.VISIBLE
-            }
+            val pos: Int =
+                (binding.cardStackView.layoutManager as CardStackLayoutManager).topPosition
+            mPresenter.onCardSwiped(pos)
         }
-
     }
 
     override fun onCardDragging(direction: Direction?, ratio: Float) {
-
     }
 
     override fun onCardRewound() {

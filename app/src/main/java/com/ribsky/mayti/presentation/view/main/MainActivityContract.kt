@@ -9,7 +9,7 @@ class MainActivityContract {
         fun criticalError()
         fun criticalErrorAuth()
         fun userBlocked()
-        fun startApp(users: ArrayList<UserModel>)
+        fun startApp()
     }
 
     interface Presenter {

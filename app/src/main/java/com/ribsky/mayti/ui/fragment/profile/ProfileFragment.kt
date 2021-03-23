@@ -9,7 +9,6 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialFadeThrough
 import com.ribsky.mayti.R
 import com.ribsky.mayti.databinding.FragmentProfileBinding
@@ -23,12 +22,15 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var activity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
+
+        activity = requireActivity() as MainActivity
 
     }
 
@@ -40,9 +42,21 @@ class ProfileFragment : Fragment() {
 
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
+        updateProfile()
 
+        binding.buttonLikes.setOnClickListener {
+            AlertsUtil(requireActivity()).alertLikesInfo(this)
+        }
 
-        with((requireActivity() as MainActivity)) {
+        binding.buttonPlus.setOnClickListener {
+            AlertsUtil(requireActivity()).alertLikesInfo(this)
+        }
+
+        return binding.root
+    }
+
+    private fun updateProfile() {
+        with(activity) {
             binding.buttonLikes.text =
                 "Лайков: " + currentCoin
             binding.textViewName.text = getCurrentUser().fln
@@ -62,49 +76,39 @@ class ProfileFragment : Fragment() {
             }
 
         }
-
-        binding.buttonLikes.setOnClickListener {
-            AlertsUtil(requireActivity()).alertLikesInfo(this)
-        }
-
-        binding.buttonPlus.setOnClickListener {
-            AlertsUtil(requireActivity()).alertLikesInfo(this)
-        }
-
-        return binding.root
     }
 
-
     fun getLikes() {
-        val alertDialog = MaterialAlertDialogBuilder(requireContext())
-        alertDialog.setTitle("Получить лайки")
-        alertDialog.setCancelable(true)
-        alertDialog.setMessage("После просмотра рекламы, ты моментально получишь 1 лайк")
-        alertDialog.setPositiveButton("Получить") { _, _ ->
+        with(MaterialAlertDialogBuilder(requireContext())) {
 
+            setTitle("Получить лайки")
+            setCancelable(true)
+            setMessage("После просмотра рекламы, ты моментально получишь 1 лайк")
+            setPositiveButton("Получить") { _, _ ->
 
-            if ((requireActivity() as MainActivity).mRewardedAd != null) {
-                (requireActivity() as MainActivity).mRewardedAd?.show(requireActivity()) {
-                    (requireActivity() as MainActivity).currentCoin++
-                    ExtraUtil().setLikes(
-                        requireContext(),
-                        (requireActivity() as MainActivity).getCurrentUser().uid,
-                        (requireActivity() as MainActivity).currentCoin
-                    )
-                    (requireActivity() as MainActivity).updateBadger()
-                    binding.buttonLikes.text =
-                        "Лайков: " + (requireActivity() as MainActivity).currentCoin
+                if (activity.mRewardedAd != null) {
+                    activity.mRewardedAd?.show(requireActivity()) {
+                        activity.currentCoin++
+                        ExtraUtil().setLikes(
+                            requireContext(),
+                            activity.getCurrentUser().uid,
+                            activity.currentCoin
+                        )
+                        activity.updateBadger()
+                        binding.buttonLikes.text =
+                            "Лайков: " + activity.currentCoin
+                    }
+                } else {
+                    // error
                 }
-            } else {
-                Snackbar.make(binding.root, "Реклама еще не готова", Snackbar.LENGTH_SHORT).show()
+
             }
+            activity.initAd()
 
-            (requireActivity() as MainActivity).initAd()
-
-
+            setNegativeButton("Отмена") { _, _ -> }
+            show()
         }
-        alertDialog.setNegativeButton("Отмена") { _, _ -> }
-        alertDialog.show()
+
     }
 
 

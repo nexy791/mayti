@@ -27,7 +27,7 @@ class MainActivityPresenter(private val mView: MainActivityContract.View) :
                     if (user.social.isNotBlank()) {
 
                         if (!user.isBlocked) {
-                            mView.startApp(users)
+                            mView.startApp()
                         } else {
                             mView.userBlocked()
                         }

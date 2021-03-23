@@ -24,7 +24,6 @@ import com.ribsky.mayti.ui.activity.settings.SettingsActivity
 import com.ribsky.mayti.util.AlertsUtil
 import com.ribsky.mayti.util.ExtraUtil
 import com.ribsky.mayti.util.RateApp
-import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 
@@ -159,16 +158,12 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
         Firebase.auth.signOut()
     }
 
-    override fun startApp(users: ArrayList<UserModel>) {
+    override fun startApp() {
         isLoaded = true
-        goFragment(0)
-
         ExtraUtil().addReward(this, getCurrentUser().uid)
-
         currentCoin = ExtraUtil().getLikes(this, getCurrentUser().uid)
         updateBadger()
-
-        EventBus.getDefault().post(users)
+        goFragment(0)
     }
 
     fun getUsers(): ArrayList<UserModel> {
@@ -188,9 +183,6 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
         finish()
     }
 
-    fun sendUsers() {
-        EventBus.getDefault().post(getUsers())
-    }
 
     fun goFragment(i: Int) {
         navController.navigate(listFragments[i])
