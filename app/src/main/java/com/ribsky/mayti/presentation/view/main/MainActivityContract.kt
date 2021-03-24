@@ -21,7 +21,7 @@ class MainActivityContract {
 
     interface Repository {
         fun getAuthUser(): FirebaseUser?
-        fun initialization(callback: (result: Boolean) -> Unit)
+        fun initRepository(callback: (result: Boolean) -> Unit)
         fun getUsers(): ArrayList<UserModel>
         fun getCurrentUser(): UserModel
         fun setCurrentUser(userModel: UserModel)

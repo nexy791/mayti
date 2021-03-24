@@ -6,7 +6,7 @@ class Intro4FragmentPresenter(private val mView: Intro4Contract.View) : Intro4Co
 
     override fun buttonNextClicked(social: String) {
         if (social.isNotBlank() && social.length > 2 && social.length < 20) {
-            mView.writeUser(social)
+            mView.writeUser("https://vk.com/$social")
             mView.goFragment()
         } else {
             mView.showError("Необходимо указать ВК")

@@ -10,7 +10,7 @@ class MainActivityPresenter(private val mView: MainActivityContract.View) :
     private val mRepository: MainActivityContract.Repository = MainRepository()
 
     override fun onCreate() {
-        mRepository.initialization {
+        mRepository.initRepository {
             if (it) {
 
                 val users: ArrayList<UserModel> = mRepository.getUsers()

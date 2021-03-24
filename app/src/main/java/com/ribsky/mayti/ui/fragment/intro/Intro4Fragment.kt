@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.transition.MaterialFadeThrough
 import com.ribsky.mayti.databinding.FragmentIntro4Binding
 import com.ribsky.mayti.presentation.presenter.intro.Intro4FragmentPresenter
@@ -20,8 +19,6 @@ class Intro4Fragment : Fragment(), Intro4Contract.View {
 
     private var _binding: FragmentIntro4Binding? = null
     private val binding get() = _binding!!
-
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

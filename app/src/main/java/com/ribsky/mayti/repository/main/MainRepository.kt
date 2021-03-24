@@ -26,7 +26,26 @@ class MainRepository : MainActivityContract.Repository {
         return Firebase.auth.currentUser
     }
 
-    override fun initialization(callback: (result: Boolean) -> Unit) {
+    override fun initRepository(callback: (result: Boolean) -> Unit) {
+        initialization {
+            if (it) callback.invoke(true)
+            else {
+                initialization { it1 ->
+                    if (it1) callback.invoke(true)
+                    else {
+                        initialization { it2 ->
+                            if (it2) callback.invoke(true)
+                            else {
+                                callback.invoke(false)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun initialization(callback: (result: Boolean) -> Unit) {
         databaseReference.get().addOnSuccessListener {
             dataSnapshot = it
             callback.invoke(true)
